@@ -16,17 +16,14 @@ namespace MovieChallengeCore.Services
         public async Task<List<Movie>> GetMovies()
         {
             var accessInfo = GetAccessInfo();
+            var client = RestService.For<IMovieApiService>(accessInfo.Uri);
 
             try
             {
-                var client = RestService.For<IMovieApiService>(accessInfo.Uri);
-                var genreResult = await client.GetGenres(accessInfo.Key);
-                var jObjectGenres = JObject.Parse(genreResult);
-                var genreList = jObjectGenres["genres"].ToObject<Genre[]>();
-                var movieResult = await client.GetMovies(accessInfo.Key);
-                var jObjectMovies = JObject.Parse(movieResult);
-                var movies = jObjectMovies["results"].ToObject<Movie[]>();
-                foreach (var movie in movies)
+                var genreList = await GetGenreList(client, accessInfo.Key);
+                var movieList = await GetMovieList(client, accessInfo.Key);
+
+                foreach (var movie in movieList)
                 {
                     var lastGenre = movie.GenreIds.Last();
                     foreach (var genreId in movie.GenreIds)
@@ -35,7 +32,8 @@ namespace MovieChallengeCore.Services
                         movie.Genre += genreId == lastGenre ? "." : ", ";
                     }
                 }
-                return movies.ToList();
+
+                return movieList.ToList();
             }
             catch (Exception e)
             {
@@ -43,17 +41,19 @@ namespace MovieChallengeCore.Services
             }
         }
 
-        //protected async Task<List<Genre>> GetGenreList(IMovieApiService client)
-        //{
-        //    var genreResult = await client.GetGenres("6ccc4110e732d20c6731baad9e5db5df");
-        //    var jObjectGenres = JObject.Parse(genreResult);
-        //    var genreList = jObjectGenres["genres"].ToObject<Genre[]>();
-        //}
+        protected async Task<List<Genre>> GetGenreList(IMovieApiService client, string key)
+        {
+            var genreResult = await client.GetGenres(key);
+            var jObjectGenres = JObject.Parse(genreResult);
+            return jObjectGenres["genres"].ToObject<List<Genre>>();
+        }
 
-        //protected async Task<List<Movie>> GetMovieList()
-        //{
-
-        //}
+        protected async Task<List<Movie>> GetMovieList(IMovieApiService client, string key)
+        {
+            var movieResult = await client.GetMovies(key);
+            var jObjectMovies = JObject.Parse(movieResult);
+            return jObjectMovies["results"].ToObject<List<Movie>>();
+        }
 
         protected ApiAccessInfo GetAccessInfo()
         {
