@@ -20,9 +20,9 @@ namespace MovieChallengeApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<MovieModel>> Get()
+        public async Task<IEnumerable<MovieModel>> Get(int page = 1)
         {
-            var result = await _movieService.GetMovies();
+            var result = await _movieService.GetMovies(page);
             var movieList = result.Select(x => new MovieModel
             {
                 Title = x.Title,

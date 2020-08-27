@@ -13,7 +13,7 @@ namespace MovieChallengeCore.Services
 {
     public class MovieService : IMovieService
     {
-        public async Task<List<Movie>> GetMovies()
+        public async Task<List<Movie>> GetMovies(int page)
         {
             var accessInfo = GetAccessInfo();
             var client = RestService.For<IMovieApiService>(accessInfo.Uri);
@@ -21,23 +21,26 @@ namespace MovieChallengeCore.Services
             try
             {
                 var genreList = await GetGenreList(client, accessInfo.Key);
-                var movieList = await GetMovieList(client, accessInfo.Key);
+                var movieList = await GetMovieList(client, accessInfo.Key, page);
 
                 foreach (var movie in movieList)
                 {
-                    var lastGenre = movie.GenreIds.Last();
-                    foreach (var genreId in movie.GenreIds)
+                    if (movie.GenreIds.Any())
                     {
-                        movie.Genre += genreList.First(x => x.Id == genreId).Name;
-                        movie.Genre += genreId == lastGenre ? "." : ", ";
+                        var lastGenre = movie.GenreIds.Last();
+                        foreach (var genreId in movie.GenreIds)
+                        {
+                            movie.Genre += genreList.First(x => x.Id == genreId).Name;
+                            movie.Genre += genreId == lastGenre ? "." : ", ";
+                        }
                     }
                 }
 
                 return movieList.ToList();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw e;
+                throw exception;
             }
         }
 
@@ -48,9 +51,9 @@ namespace MovieChallengeCore.Services
             return jObjectGenres["genres"].ToObject<List<Genre>>();
         }
 
-        protected async Task<List<Movie>> GetMovieList(IMovieApiService client, string key)
+        protected async Task<List<Movie>> GetMovieList(IMovieApiService client, string key, int page)
         {
-            var movieResult = await client.GetMovies(key);
+            var movieResult = await client.GetMovies(key, page);
             var jObjectMovies = JObject.Parse(movieResult);
             return jObjectMovies["results"].ToObject<List<Movie>>();
         }

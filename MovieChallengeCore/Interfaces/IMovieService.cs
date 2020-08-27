@@ -6,6 +6,6 @@ namespace MovieChallengeCore.Interfaces
 {
     public interface IMovieService
     {
-        Task<List<Movie>> GetMovies();
+        Task<List<Movie>> GetMovies(int page);
     }
 }
