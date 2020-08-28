@@ -59,3 +59,7 @@ Master - Fiz uso do template comum a criação de API utilizando o Visual Studio
 Obviamente existem arquivos no versionamento nessa branch, mas considerei apenas como um bootstrap para o desafio. Também foram criados os arquivos ocultos do git .gitattributes e .gitignore, espero que não seja algo danoso, haja vista que nada foi desenvolvido por mim nessa branch, me atendo aos requisitos do desafio, porém do o bootstrap que detalhei anteriormente.
 
 Dev - Todo o desenvolvimento foi feito, com o maximo de cuidado e respeito pela oportunidade que estão me dando, busquei atribuir títulos significativos aos commits e que visassem esclarecer a quem estiver lendo, não foram muitos, tendo em vista que a carga de atividades realizadas entre eles foi grande porque se tornava necessário para entregar uma parte funcional da aplicação.
+
+## :bulb: Pequeno complemento
+
+Tomei a liberdade de adicionar a paginação nos query params, para explorar mais páginas de conteúdo desse banco de dados, uma pequena adição para possibilitar ir além dos 20 itens que são carregados por padrão.
