@@ -1,6 +1,6 @@
 ﻿<h2 aligin="center">Movie API</h2>
 
-### :rocket: Tecnologias usadas
+## :rocket: Tecnologias usadas
 
 Este projeto foi desenvolvido com as seguintes tecnologias:
 
@@ -29,7 +29,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
   
 </table>
 
-### :package: Sobre o projeto
+## :package: Sobre o projeto
 
 O proje visa a construção de uma API que busca simplificar os dados que são oriundos da API de Banco de Dados de Filmes (https://www.themoviedb.org/), tratando e exibindo de forma que a aplicação que venha a consumí-la trate apenas da exibição no frontend.
 
@@ -37,13 +37,13 @@ O proje visa a construção de uma API que busca simplificar os dados que são o
 <img src="./preview.PNG"/>
 <br>
 
-### :building_construction: Os padrões utilizados
+## :building_construction: Os padrões utilizados
 
 Injeção de dependência, utlizado na controller para estabelecer a service que trata retorno da listagem de filmes que estão para serem lançados (upcomming).
 
 Acredito que devido a objetividade do projeto não considerei a adoção de algo que envolvesse mais padrões, tomei essa decisão por considerar que o objetivo alcançado é o ideal e que estou aberto para aprender sempre, é possível que tenha feito uso de outros padrões, mas que pelo uso recorrente de forma natural não me venha a identificá-lo como algo a ser listado.
 
-### :speech_balloon: Bibliotecas Externas
+## :speech_balloon: Bibliotecas Externas
 
 Refit - O pacote é amplamente conhecido por implementar a criação de consultas no padrão REST dentro de projetos .NET Core, Xamarin ou .NET Framework. O seu uso se tornou tão amplo que foi integrado aos artefatos da Microsoft e é hoje um dos pacotes oficiais mais utilizados, com mais de 7.5 milhões de downloads pelo Nuget.
 
