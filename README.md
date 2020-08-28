@@ -34,7 +34,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 O proje visa a construção de uma API que busca simplificar os dados que são oriundos da API de Banco de Dados de Filmes (https://www.themoviedb.org/), tratando e exibindo de forma que a aplicação que venha a consumí-la trate apenas da exibição no frontend.
 
 <br>
-<img src="./preview.png"/>
+<img src="./preview.PNG"/>
 <br>
 
 ### :building_construction: Os padrões utilizados
